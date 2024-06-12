@@ -50,27 +50,36 @@ namespace SCPEnhancementMeow
             foreach (var enhancer in enhancers)
             {
                 enhancer.Destruct();
-                enhancers.Remove(enhancer);
             }
+
+            enhancers.Clear();
         }
 
         private void SetEnhancer(RoleTypeId roleType)
         {
             ClearEnhancers();
-            Assembly assembly = Assembly.GetExecutingAssembly();
 
-            foreach (var type in assembly.GetTypes())
+            foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
             {
-                EnhancerAttributeAttribute attribute = type.GetCustomAttribute<EnhancerAttributeAttribute>();
-
-                if (attribute == null)
-                    continue;
-
-                if (roleType == attribute.fitRoleTypes)
+                try
                 {
-                    type
-                       .GetConstructor(new Type[1] { typeof(Player) })
-                       .Invoke(new Object[1] { this.player });
+                    EnhancerAttributeAttribute attribute = type.GetCustomAttribute<EnhancerAttributeAttribute>();
+
+                    if (attribute == null)
+                        continue;
+
+                    if (roleType == attribute.fitRoleTypes)
+                    {
+                        var instance = (EnhancerBase)type
+                           .GetConstructor(new Type[1] { typeof(Player) })
+                           .Invoke(new Object[1] { this.player });
+
+                        enhancers.Add(instance);
+                    }
+                }
+                catch(Exception e)
+                {
+                    Log.Error($"Error while loading enhancer:\n{e.Message}");
                 }
             }
         }
