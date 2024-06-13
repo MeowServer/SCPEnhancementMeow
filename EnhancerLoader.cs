@@ -30,17 +30,25 @@ namespace SCPEnhancementMeow
 
         public static void RemoveLoader(Player player)
         {
-            enhancerLoaders.ForEach(x => x.ClearEnhancers());
+            
+            foreach(var loader in enhancerLoaders)
+            {
+                if(loader.player == player)
+                {
+                    loader.ClearEnhancers();
+                }
+            }
+
             enhancerLoaders.RemoveAll(x => x.player == player);
         }
 
         public static void OnChangingRole(ChangingRoleEventArgs ev)
         {
-            foreach (var enhancer in enhancerLoaders)
+            foreach (var loader in enhancerLoaders)
             {
-                if (enhancer.player == ev.Player)
+                if (loader.player == ev.Player)
                 {
-                    enhancer.SetEnhancer(ev.NewRole);
+                    loader.SetEnhancer(ev.NewRole);
                 }
             }
         }
