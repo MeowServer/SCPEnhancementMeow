@@ -15,13 +15,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
+// * V1.0.1
+// - Add an enhancing role type list to the config file.
+
 namespace SCPEnhancementMeow
 {
     public class Plugin : Plugin<Config>
     {
         public override string Name => "SCPEnhancementMeow";
         public override string Author => "MeowServerOwner";
-        public override Version Version => new Version(1, 0, 0);
+        public override Version Version => new Version(1, 0, 1);
 
         public static Plugin instance;
 

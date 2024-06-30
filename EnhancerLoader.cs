@@ -21,8 +21,10 @@ namespace SCPEnhancementMeow
 
         public EnhancerLoader(Player player)
         {
-            this.player = player;
+            if(enhancerLoaders.Any(x => x.player == player))
+                throw new Exception("Player already has an enhancer loader.");
 
+            this.player = player;
             SetEnhancer(player.Role.Type);
 
             enhancerLoaders.Add(this);
@@ -30,27 +32,13 @@ namespace SCPEnhancementMeow
 
         public static void RemoveLoader(Player player)
         {
-            
-            foreach(var loader in enhancerLoaders)
-            {
-                if(loader.player == player)
-                {
-                    loader.ClearEnhancers();
-                }
-            }
-
+            enhancerLoaders.Find(x => x.player == player)?.ClearEnhancers();
             enhancerLoaders.RemoveAll(x => x.player == player);
         }
 
         public static void OnChangingRole(ChangingRoleEventArgs ev)
         {
-            foreach (var loader in enhancerLoaders)
-            {
-                if (loader.player == ev.Player)
-                {
-                    loader.SetEnhancer(ev.NewRole);
-                }
-            }
+            enhancerLoaders.Find(x => x.player == ev.Player)?.SetEnhancer(ev.NewRole);
         }
 
         private void ClearEnhancers()
@@ -66,6 +54,9 @@ namespace SCPEnhancementMeow
         private void SetEnhancer(RoleTypeId roleType)
         {
             ClearEnhancers();
+
+            if(!Config.instance.EnhancingRoleTypes.Contains(roleType))
+                return;
 
             foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
             {
