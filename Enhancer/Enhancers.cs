@@ -1,5 +1,7 @@
 ﻿using Exiled.API.Enums;
 using Exiled.API.Features;
+using Exiled.API.Features.Doors;
+using Exiled.API.Interfaces;
 using Exiled.Events.EventArgs.Player;
 using Exiled.Events.EventArgs.Scp049;
 using Exiled.Events.EventArgs.Scp173;
@@ -227,7 +229,17 @@ namespace SCPEnhancementMeow.Enhancer
                     {
                         foreach (ReferenceHub referenceHub in item.AffectedPlayers)
                         {
-                            Player.Get(referenceHub).Hurt(3f, Exiled.API.Enums.DamageType.Poison);
+                            Player.Get(referenceHub).Hurt(3.3f, Exiled.API.Enums.DamageType.Poison);
+                        }
+
+                        var affectedDoors = Door.List
+                            .Where(x => (x.Position - item.SourcePosition).magnitude <= item.MaxDistance)
+                            .Where(x => x is IDamageableDoor)
+                            .Select(x => (IDamageableDoor)x);
+
+                        foreach(var door in affectedDoors)
+                        {
+                            door.Damage(10f);
                         }
                     }
                     catch (Exception ex)

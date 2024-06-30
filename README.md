@@ -13,5 +13,5 @@
 | SCP106 | Increase damage when the human is close enough |
 | SCP939 | Increase damage when the human is in the Amnestic Cloud |
 | SCP049 | Heal the nearby SCPs when using the Doctor's Call |
-| SCP173 | Gradually damage the humans standing on SCP173's Tantrums |
+| SCP173 | Gradually damage the humans and doors within SCP173's Tantrums |
 | SCP096 | Increase damage when having < 500 HP |

@@ -352,7 +352,7 @@
   <ItemGroup>
     <Compile Include="EnhancerLoader.cs" />
     <Compile Include="Plugin.cs" />
-    <Compile Include="Config.cs" />
+    <Compile Include="Config\Config.cs" />
     <Compile Include="Enhancer\EnhancerAttribute.cs" />
     <Compile Include="Enhancer\EnhancerBase.cs" />
     <Compile Include="Enhancer\Enhancers.cs" />
