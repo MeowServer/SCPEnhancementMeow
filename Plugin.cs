@@ -17,6 +17,7 @@ using System.Reflection;
 
 // * V1.0.1
 // - Add an enhancing role type list to the config file.
+// - Add door erosion effect on tantrums.
 
 namespace SCPEnhancementMeow
 {
