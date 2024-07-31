@@ -50,7 +50,8 @@ namespace SCPEnhancementMeow.Enhancer
 
             if (distance <= 0.3)
             {
-                ev.Target.Teleport(Room.List.First(x => x.Type == RoomType.Pocket));
+                ev.Target.Teleport(RoomType.Pocket);
+                ev.Target.EnableEffect(EffectType.PocketCorroding);
             }
             else if(distance <= 1)
             {

@@ -18,6 +18,8 @@ using System.Reflection;
 // * V1.0.1
 // - Add an enhancing role type list to the config file.
 // - Add door erosion effect on tantrums.
+// * V1.0.2
+// - Bug fixing
 
 namespace SCPEnhancementMeow
 {
@@ -25,7 +27,7 @@ namespace SCPEnhancementMeow
     {
         public override string Name => "SCPEnhancementMeow";
         public override string Author => "MeowServerOwner";
-        public override Version Version => new Version(1, 0, 1);
+        public override Version Version => new Version(1, 0, 2);
 
         public static Plugin instance;
 
